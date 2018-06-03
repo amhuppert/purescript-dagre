@@ -1,0 +1,16 @@
+{
+  "name": "purescript-dagre",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-prelude": "^4.0.0",
+    "purescript-maybe": "^4.0.0",
+    "purescript-tuples": "^5.0.0",
+    "lodash": "^4.17.10"
+  },
+  "devDependencies": {}
+}
