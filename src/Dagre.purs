@@ -79,6 +79,7 @@ defEdgeLabel :: EdgeLabel
 defEdgeLabel =
   { minLength: 1
   , width: 0.0
+  , weight: 1.0
   , height: 0.0
   , labelPosition: Right
   , labelOffset: 10.0
