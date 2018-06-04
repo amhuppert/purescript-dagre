@@ -3,7 +3,6 @@
 var dagre = require("dagre");
 var lodash = require("lodash");
 var psDagre = require("Dagre");
-var show = require("Data.Show").show;
 
 exports.layout = function(config) {
     return function(nodes) {
@@ -26,7 +25,7 @@ exports.layout = function(config) {
                                   weight: l.weight,
                                   width: l.width,
                                   height: l.height,
-                                  labelpos: show(psDagre.showLabelPosition)(l.labelPosition),
+                                  labelpos: psDagre.showLabelPosition.show(l.labelPosition),
                                   labeloffset: l.labelOffset
                                 };
                 g.setEdge(edge.from, edge.to, edgeLabel);
@@ -34,15 +33,15 @@ exports.layout = function(config) {
 
 
             /**** Run layout ********/
-            dagre.layout(g, { rankdir: show(psDagre.showRankDirection)(config.rankDirection),
-                              align: show(psDagre.showAlign)(config.align),
+            dagre.layout(g, { rankdir:psDagre.showRankDirection.show(config.rankDirection),
+                              align: psDagre.showAlign.show(config.align),
                               nodesep: config.nodeSep,
                               edgesep: config.edgeSep,
                               ranksep: config.rankSep,
                               marginx: config.marginX,
                               marginy: config.marginY,
-                              acyclicer: show(psDagre.showAcyclicer)(config.acyclicer),
-                              ranker: show(psDagre.showRanker)(config.ranker)
+                              acyclicer: psDagre.showAcyclicer.show(config.acyclicer),
+                              ranker: psDagre.showRanker.show(config.ranker)
                             }
                         );
 
