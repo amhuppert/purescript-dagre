@@ -3,7 +3,7 @@
 var dagre = require("dagre");
 var lodash = require("lodash");
 
-exports.layout = function(show) {
+exports.layoutInternal = function(show) {
     function(config) {
         return function(nodes) {
             return function(edges) {
