@@ -9,6 +9,7 @@ exports.layout = function(config) {
         return function(edges) {
             /**** Setup graph ******/
             var g = new dagre.graphlib.Graph();
+            console.info(psDagre);
             g.setGraph({});
             g.setDefaultEdgeLabel(function() { return {}; });
 
