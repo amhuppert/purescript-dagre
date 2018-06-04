@@ -2,7 +2,7 @@
 
 var dagre = require("dagre");
 var lodash = require("lodash");
-var psDagre = require("Dagre");
+var psDagre = require("./index");
 
 exports.layout = function(config) {
     return function(nodes) {
