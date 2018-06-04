@@ -3,6 +3,7 @@
 var dagre = require("dagre");
 var lodash = require("lodash");
 var psDagre = require("Dagre");
+var show = require("Prelude").show;
 
 exports.layout = function(config) {
     return function(nodes) {
@@ -19,13 +20,13 @@ exports.layout = function(config) {
             });
 
             edges.map(function(edgeTuple) {
-                var edge = lodash.cloneDeep(labeledEdge.value0);
-                var l = labeledEdge.value1;
+                var edge = lodash.cloneDeep(edgeTuple.value0);
+                var l = edgeTuple.value1;
                 var edgeLabel = { minlen: l.minLength,
                                   weight: l.weight,
                                   width: l.width,
                                   height: l.height,
-                                  labelpos: psDagre.showLabelPosition(l.labelPosition),
+                                  labelpos: show(psDagre.showLabelPosition)(l.labelPosition),
                                   labeloffset: l.labelOffset
                                 };
                 g.setEdge(edge.from, edge.to, edgeLabel);
@@ -33,15 +34,15 @@ exports.layout = function(config) {
 
 
             /**** Run layout ********/
-            dagre.layout(g, { rankdir: psDagre.showRankDirection(config.rankDirection),
-                              align: psDagre.showAlign(config.align),
+            dagre.layout(g, { rankdir: show(psDagre.showRankDirection)(config.rankDirection),
+                              align: show(psDagre.showAlign)(config.align),
                               nodesep: config.nodeSep,
                               edgesep: config.edgeSep,
                               ranksep: config.rankSep,
                               marginx: config.marginX,
                               marginy: config.marginY,
-                              acyclicer: psDagre.showAcyclicer(config.acyclicer),
-                              ranker: psDagre.showRanker(config.ranker)
+                              acyclicer: show(psDagre.showAcyclicer)(config.acyclicer),
+                              ranker: show(psDagre.showRanker)(config.ranker)
                             }
                         );
 
@@ -65,8 +66,8 @@ exports.layout = function(config) {
                             to: edge.w
                             },
                     labelCenter: { x: label.x,
-                                    y: label.y
-                                },
+                                   y: label.y
+                                 },
                     controlPoints: label.points
                     };
                 return edgeResult;
