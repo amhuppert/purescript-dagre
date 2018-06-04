@@ -137,10 +137,35 @@ type LayoutResult =
                    }
   }
 
-foreign import layout :: LayoutConfig
+foreign import layoutInternal
+                      :: ShowFuncs
+                      -> LayoutConfig
                       -> Array (Tuple NodeId NodeLabel)
                       -> Array (Tuple Edge EdgeLabel)
                       -> LayoutResult
+
+type ShowFuncs =
+  { labelPosition :: LabelPosition -> String
+  , rankDirection :: RankDirection -> String
+  , align :: Align -> String
+  , acyclicer :: Acyclicer -> String
+  , ranker :: Ranker -> String
+  }
+
+showFuncs :: ShowFuncs
+showFuncs =
+  { labelPosition: show
+  , rankDirection: show
+  , align: show
+  , acyclicer: show
+  , ranker: show
+  }
+
+layout :: LayoutConfig
+          -> Array (Tuple NodeId NodeLabel)
+          -> Array (Tuple Edge EdgeLabel)
+          -> LayoutResult
+layout = layoutInternal showFuncs
 
 layoutDefault :: Array (Tuple NodeId NodeLabel)
               -> Array (Tuple Edge EdgeLabel)
