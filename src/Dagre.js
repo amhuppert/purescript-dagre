@@ -9,7 +9,16 @@ exports.layoutInternal = function(show) {
             return function(edges) {
                 /**** Setup graph ******/
                 var g = new dagre.graphlib.Graph();
-                g.setGraph({});
+                g.setGraph({ rankdir: show.rankDirection(config.rankDirection),
+                             align: show.align(config.align),
+                             nodesep: config.nodeSep,
+                             edgesep: config.edgeSep,
+                             ranksep: config.rankSep,
+                             marginx: config.marginX,
+                             marginy: config.marginY,
+                             acyclicer: show.acyclicer(config.acyclicer),
+                             ranker: show.ranker(config.ranker)
+                           });
                 g.setDefaultEdgeLabel(function() { return {}; });
 
                 nodes.map(function(nodeTuple) {
@@ -33,17 +42,7 @@ exports.layoutInternal = function(show) {
 
 
                 /**** Run layout ********/
-                dagre.layout(g, { rankdir: show.rankDirection(config.rankDirection),
-                                align: show.align(config.align),
-                                nodesep: config.nodeSep,
-                                edgesep: config.edgeSep,
-                                ranksep: config.rankSep,
-                                marginx: config.marginX,
-                                marginy: config.marginY,
-                                acyclicer: show.acyclicer(config.acyclicer),
-                                ranker: show.ranker(config.ranker)
-                                }
-                            );
+                dagre.layout(g);
 
 
                 /**** Get layout result into expected format ****/
