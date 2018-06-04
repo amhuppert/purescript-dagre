@@ -3,7 +3,7 @@
 var dagre = require("dagre");
 var lodash = require("lodash");
 var psDagre = require("Dagre");
-var show = require("Prelude").show;
+var show = require("Data.Show").show;
 
 exports.layout = function(config) {
     return function(nodes) {
