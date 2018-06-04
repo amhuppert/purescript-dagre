@@ -13,6 +13,8 @@ module Dagre
        , LayoutResult
        , layout
        , defConfig
+       , defEdgeLabel
+       , layoutDefault
        ) where
 
 
@@ -73,6 +75,15 @@ defConfig =
   , ranker: NetworkSimplex
   }
 
+defEdgeLabel :: EdgeLabel
+defEdgeLabel =
+  { minLength: 1
+  , width: 0.0
+  , height: 0.0
+  , labelPosition: Right
+  , labelOffset: 10.0
+  }
+
 data RankDirection = TopToBottom
                    | BottomToTop
                    | LeftToRight
@@ -125,4 +136,12 @@ type LayoutResult =
                    }
   }
 
-foreign import layout :: LayoutConfig -> Array (Tuple NodeId NodeLabel) -> Array (Tuple Edge EdgeLabel) -> LayoutResult
+foreign import layout :: LayoutConfig
+                      -> Array (Tuple NodeId NodeLabel)
+                      -> Array (Tuple Edge EdgeLabel)
+                      -> LayoutResult
+
+layoutDefault :: Array (Tuple NodeId NodeLabel)
+              -> Array (Tuple Edge EdgeLabel)
+              -> LayoutResult
+layoutDefault = layout defConfig
