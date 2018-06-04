@@ -4,12 +4,11 @@ var dagre = require("dagre");
 var lodash = require("lodash");
 
 exports.layoutInternal = function(show) {
-    function(config) {
+    return function(config) {
         return function(nodes) {
             return function(edges) {
                 /**** Setup graph ******/
                 var g = new dagre.graphlib.Graph();
-                console.info(psDagre);
                 g.setGraph({});
                 g.setDefaultEdgeLabel(function() { return {}; });
 
